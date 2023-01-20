@@ -21,6 +21,7 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve(parent, args) {
         // code to get data from db/other source
+        return { id: "id"+args.id, name: "name"+args.id, genre: "genre"+args.id }
       }
     },
   }
