@@ -1,6 +1,7 @@
 {
     "env": {
         "MONGO_USER": "node-app",
-        "MONGO_PASSWORD": "node-app"
+        "MONGO_PASSWORD": "node-app",
+        "MONGO_DATABASE": "graphql-books-authors"
     }
 }

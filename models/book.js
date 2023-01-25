@@ -17,4 +17,4 @@ const bookSchema = new Schema({
   }
 });
 
-module.exports = mongoose.models('Book', bookSchema);
+module.exports = mongoose.model('Book', bookSchema);

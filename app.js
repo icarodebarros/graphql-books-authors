@@ -12,7 +12,7 @@ app.use('/graphql', graphqlHTTP({
 
 
 mongoose
-  .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.gafjw.mongodb.net/?retryWrites=true&w=majority`)
+  .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.gafjw.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`)
   .then(_result => {
     app.listen(4000, () => {
       console.log('Now listening for requests on port 4000');
