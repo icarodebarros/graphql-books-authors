@@ -1,17 +1,23 @@
 import { useQuery, useMutation } from '@apollo/client';
 import { useState } from 'react';
-import { ADD_BOOK, GET_AUTHORS } from '../queries/queries';
+import { ADD_BOOK, GET_AUTHORS, GET_BOOKS } from '../queries/queries';
 
 function AddBook() {
   const { loading, error, data } = useQuery(GET_AUTHORS);
-  const [addBookMutation, { mData, mLoading, mError }] = useMutation(ADD_BOOK);
-  
+  const [addBookMutation, { _data, _loading, _error }] = useMutation(ADD_BOOK);
+
   const [book, setBook] = useState({ name: '', genre: '', authorId: '' });
 
   const onSubmitHandler = (ev) => {
     ev.preventDefault();
-    addBookMutation({ variables: { name: book.name, genre: book.genre, authorId: book.authorId } })
-      .then(info => console.log('info', info));
+    addBookMutation({
+      variables: {
+        name: book.name,
+        genre: book.genre,
+        authorId: book.authorId,
+      },
+      refetchQueries: [{query: GET_BOOKS}]
+    }).then((_info) => setBook({ name: '', genre: '', authorId: '' }));
   };
 
   let options;
@@ -54,6 +60,7 @@ function AddBook() {
       <div className="field">
         <label>Author:</label>
         <select
+          value={book.authorId}
           onChange={(ev) =>
             setBook((curBook) => ({ ...curBook, authorId: ev.target.value }))
           }
